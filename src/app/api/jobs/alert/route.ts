@@ -2,10 +2,12 @@ import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
 
 // Initialize Supabase Admin Client
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getAdminClient() {
+    return createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+}
 
 export async function POST(req: NextRequest) {
     try {
@@ -15,6 +17,8 @@ export async function POST(req: NextRequest) {
         if (!jobId) {
             return NextResponse.json({ error: "Job ID is required" }, { status: 400 })
         }
+
+        const supabaseAdmin = getAdminClient()
 
         // 1. Fetch Job Details
         const { data: job, error: jobError } = await supabaseAdmin

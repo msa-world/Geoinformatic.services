@@ -2,10 +2,12 @@ import { type NextRequest, NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
 
 // Initialize Supabase Client with Service Role Key for Admin operations
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getAdminClient() {
+    return createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+}
 
 const ADMIN_TOKEN = process.env.ADMIN_SECRET_TOKEN || 'admin-secret-123'
 
@@ -29,6 +31,7 @@ export async function GET(request: NextRequest) {
     }
 
     try {
+        const supabaseAdmin = getAdminClient()
         const { data, error } = await supabaseAdmin
             .from("jobs")
             .select("*")
@@ -51,6 +54,7 @@ export async function POST(request: NextRequest) {
         const body = await request.json()
         // Start validation if needed
 
+        const supabaseAdmin = getAdminClient()
         const { data, error } = await supabaseAdmin
             .from("jobs")
             .insert([body])
@@ -114,6 +118,7 @@ export async function PUT(request: NextRequest) {
             return NextResponse.json({ message: "Job ID required" }, { status: 400 })
         }
 
+        const supabaseAdmin = getAdminClient()
         const { data, error } = await supabaseAdmin
             .from("jobs")
             .update(updates)
@@ -141,6 +146,7 @@ export async function DELETE(request: NextRequest) {
             return NextResponse.json({ message: "Job ID required" }, { status: 400 })
         }
 
+        const supabaseAdmin = getAdminClient()
         const { error } = await supabaseAdmin
             .from("jobs")
             .delete()
