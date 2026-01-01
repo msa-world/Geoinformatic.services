@@ -1,11 +1,10 @@
-"use client"
-
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { CheckCircle, AlertCircle } from "lucide-react"
 import Link from "next/link"
+import ReloadButton from "./reload-button"
 
 export default async function DatabaseSetupPage() {
   const supabase = await createClient()
@@ -87,13 +86,11 @@ export default async function DatabaseSetupPage() {
                 </ol>
               </div>
 
-              <Button variant="outline" className="w-full bg-transparent" onClick={() => window.location.reload()}>
-                Check Database Status
-              </Button>
+              <ReloadButton />
             </>
           )}
         </CardContent>
       </Card>
-    </div>
+    </div >
   )
 }
