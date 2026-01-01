@@ -2,10 +2,12 @@ import { type NextRequest, NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
 
 // Initialize Supabase Client with Service Role Key for Admin operations
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getAdminClient() {
+    return createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+}
 
 const ADMIN_TOKEN = process.env.ADMIN_SECRET_TOKEN || 'admin-secret-123'
 
@@ -24,6 +26,7 @@ export async function GET(request: NextRequest) {
     }
 
     try {
+        const supabaseAdmin = getAdminClient()
         const { data: apps, error } = await supabaseAdmin
             .from("job_applications")
             .select(`
@@ -67,6 +70,7 @@ export async function PUT(request: NextRequest) {
             return NextResponse.json({ message: "ID and Status required" }, { status: 400 })
         }
 
+        const supabaseAdmin = getAdminClient()
         const { data, error } = await supabaseAdmin
             .from("job_applications")
             .update({ status })
