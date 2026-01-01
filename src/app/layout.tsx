@@ -75,6 +75,8 @@ export const metadata: Metadata = {
     },
 };
 
+import { Analytics } from "@vercel/analytics/react"
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -100,6 +102,7 @@ export default function RootLayout({
                     <JobAlertProvider>
                         {children}
                         <Toaster position="top-right" richColors />
+                        <Analytics />
                     </JobAlertProvider>
                 </AuthProvider>
             </body>
