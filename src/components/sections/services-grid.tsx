@@ -66,57 +66,56 @@ export default function ServicesGrid() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    // Kill any existing triggers with these IDs to prevent conflicts
-    ScrollTrigger.getById("services-stack")?.kill();
-    ScrollTrigger.getById("welcome-pin")?.kill();
+    useGSAP(() => {
+      // Kill any existing triggers with these IDs to prevent conflicts
+      ScrollTrigger.getById("services-stack")?.kill();
+      ScrollTrigger.getById("welcome-pin")?.kill();
 
-    const welcomeIntro = document.querySelector("#welcome-intro");
-    
-    if (welcomeIntro && sectionRef.current) {
-      // 1. Pin Welcome Intro
-      ScrollTrigger.create({
-        id: "welcome-pin",
-        trigger: welcomeIntro,
-        start: "top top",
-        end: () => `+=${sectionRef.current?.offsetHeight || 1000}`,
-        pin: true,
-        pinSpacing: false,
-        anticipatePin: 1,
-      });
+      const welcomeIntro = document.querySelector("#welcome-intro");
+      
+      if (welcomeIntro && sectionRef.current) {
+        // 1. Pin Welcome Intro
+        ScrollTrigger.create({
+          id: "welcome-pin",
+          trigger: welcomeIntro,
+          start: "top top",
+          end: () => `+=${sectionRef.current?.offsetHeight || 1000}`,
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+        });
 
-      // 2. Stack animation for Services
-      gsap.fromTo(sectionRef.current,
-        { 
-          y: "30vh",
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          ease: "none",
-          scrollTrigger: {
-            id: "services-stack",
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "top top",
-            scrub: true,
+        // 2. Stack animation for Services
+        // REMOVED opacity: 0 to fix transparency issue
+        gsap.fromTo(sectionRef.current,
+          { 
+            y: "50vh", // Starting lower for a better stacking feel
+          },
+          {
+            y: 0,
+            ease: "none",
+            scrollTrigger: {
+              id: "services-stack",
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "top top",
+              scrub: true,
+            }
           }
-        }
-      );
-    }
-
-    // Header animation
-    gsap.from(".services-header", {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: ".services-header",
-        start: "top 85%",
-        toggleActions: "play none none reverse"
+        );
       }
-    });
+
+      // Header animation
+      gsap.from(".services-header", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".services-header",
+          start: "top 90%", // Trigger slightly earlier
+          toggleActions: "play none none reverse"
+        }
+      });
 
     // Staggered cards entrance
     if (cardsRef.current) {
@@ -138,8 +137,8 @@ export default function ServicesGrid() {
     <section 
       ref={sectionRef} 
       id="services-section"
-      className="relative py-24 bg-[#0A0A0A] z-20 shadow-[0_-50px_100px_rgba(0,0,0,0.9)] border-t border-white/5"
-      style={{ willChange: "transform, opacity" }}
+      className="relative py-24 bg-[#0A0A0A] z-20 shadow-[0_-50px_100px_rgba(0,0,0,0.9)] border-t border-white/5 opacity-100"
+      style={{ willChange: "transform" }}
     >
       {/* Background Tech Pattern */}
       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none"
@@ -149,20 +148,20 @@ export default function ServicesGrid() {
         }}
       />
 
-      <div ref={containerRef} className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
-        <div className="mb-16 services-header">
-          <span className="text-secondary font-mono tracking-widest text-xs sm:text-sm uppercase mb-4 block">// Our Expertise</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            High-Tech <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Geospatial</span><br /> Solutions
-          </h2>
-          <p className="text-white/60 text-base sm:text-lg max-w-2xl leading-relaxed">
-            Explore our range of advanced mapping and surveying capabilities designed for precision and efficiency.
-          </p>
-        </div>
+        <div ref={containerRef} className="container mx-auto px-6 relative z-10">
+          {/* Section Header */}
+          <div className="mb-16 services-header">
+            <span className="text-secondary font-mono tracking-widest text-xs sm:text-sm uppercase mb-4 block">// Our Expertise</span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+              Solutions
+            </h2>
+            <p className="text-gray-400 text-base sm:text-lg max-w-3xl leading-relaxed">
+              Explore our range of advanced mapping and surveying capabilities designed for precision and efficiency.
+            </p>
+          </div>
 
-        {/* Grid Layout */}
-        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Grid Layout */}
+          <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesData.map((service) => (
             <div key={service.id} className="flex justify-center service-card-wrapper">
               <ServiceCard service={service} />
