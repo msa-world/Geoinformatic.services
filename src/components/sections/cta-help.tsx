@@ -16,13 +16,14 @@ const CtaHelpSection = () => {
       ref={sectionRef}
       className="relative py-28 lg:py-32 bg-no-repeat bg-center overflow-hidden"
       style={{
-        backgroundImage:
-          "url('https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/986c6fe2-3527-491b-b576-ae12c431a91d-GEOINFORMATIC-com/assets/images/map-13.png')",
-        backgroundSize: "cover",
+        backgroundImage: "url('/world-map-silhouette.png')",
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
       }}
     >
       {/* Enhanced glass morphism overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/70 to-white/75 backdrop-blur-md" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/65 backdrop-blur-sm" />
 
       {/* Animated shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
