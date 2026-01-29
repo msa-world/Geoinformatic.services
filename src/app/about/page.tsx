@@ -77,7 +77,7 @@ export default function AboutPage() {
                                 <span className="text-white/90 text-sm font-medium tracking-wider uppercase">Pioneering Geospatial Intelligence</span>
                             </div>
                             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-tight">
-                                About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C7A24D] to-[#D97D25]">geo-informatic</span>
+                                About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#fb923c] to-[#ea580c]">geo-informatic</span>
                             </h1>
                             <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
                                 Leading provider of innovative GIS solutions, transforming spatial data into strategic insights for a better world.
@@ -93,7 +93,7 @@ export default function AboutPage() {
                                     <span className="relative z-10 font-semibold text-white flex items-center gap-2">
                                         Discover More <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </span>
-                                    <div className="absolute inset-0 bg-gradient-to-r from-[#C7A24D]/20 to-[#D97D25]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-r from-[#fb923c]/20 to-[#ea580c]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </motion.a>
                             </div>
                         </motion.div>
@@ -116,7 +116,7 @@ export default function AboutPage() {
                     {/* Grid Background */}
                     <div className="absolute inset-0 pointer-events-none">
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-                        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -z-10"></div>
+                        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#f97316]/5 rounded-full blur-[120px] -z-10"></div>
                     </div>
 
                     <div className="container relative z-10 mx-auto px-4">
@@ -128,15 +128,15 @@ export default function AboutPage() {
                                 transition={{ duration: 0.8 }}
                             >
                                 <div className="flex items-center gap-2 mb-4">
-                                    <span className="w-12 h-[2px] bg-primary"></span>
-                                    <span className="text-primary font-semibold uppercase tracking-widest text-sm">Who We Are</span>
+                                    <span className="w-12 h-[2px] bg-[#f97316]"></span>
+                                    <span className="text-[#f97316] font-semibold uppercase tracking-widest text-sm">Who We Are</span>
                                 </div>
                                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight">
-                                    Transforming Data into <span className="text-primary">Actionable Insights</span>
+                                    Transforming Data into <span className="text-[#f97316]">Actionable Insights</span>
                                 </h2>
                                 <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
                                     <p>
-                                        At <strong className="text-gray-900">Geoinformatic Services</strong>, we specialize in providing high-quality Geographic Information System (GIS) solutions tailored to meet the evolving needs of modern industries.
+                                        At <strong className="text-[#f97316]">Geoinformatic Services</strong>, we specialize in providing high-quality Geographic Information System (GIS) solutions tailored to meet the evolving needs of modern industries.
                                     </p>
                                     <p>
                                         Our team consists of experienced GIS professionals, analysts, and engineers dedicated to delivering reliable, cost-effective, and innovative geospatial solutions. We combine technical precision with on-ground experience.
@@ -144,7 +144,7 @@ export default function AboutPage() {
                                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
                                         {['Strategic Planning', 'Spatial Analysis', 'Remote Sensing', 'Data Visualization'].map((item, i) => (
                                             <li key={i} className="flex items-center gap-3">
-                                                <CheckCircle2 className="w-5 h-5 text-primary" />
+                                                <CheckCircle2 className="w-5 h-5 text-[#f97316]" />
                                                 <span className="font-medium text-gray-700">{item}</span>
                                             </li>
                                         ))}

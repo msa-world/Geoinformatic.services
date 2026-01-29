@@ -70,10 +70,10 @@ export default function WelcomeIntro() {
             {/* Badge */}
             <motion.div
               variants={paragraphVariants}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f97316]/10 border border-[#f97316]/20"
             >
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-sm font-medium text-primary">About Us</span>
+              <span className="w-2 h-2 rounded-full bg-[#f97316] animate-pulse" />
+              <span className="text-sm font-medium text-[#f97316]">About Us</span>
             </motion.div>
 
             {/* Heading (reduced size) */}
@@ -94,7 +94,7 @@ export default function WelcomeIntro() {
               variants={paragraphVariants}
               className="text-lg text-gray-600 leading-relaxed hover:text-gray-800 transition-colors duration-300"
             >
-              At <strong className="text-primary">GEOINFORMATIC Services</strong>, we specialize in providing
+              At <strong className="text-[#f97316]">GEOINFORMATIC Services</strong>, we specialize in providing
               high-quality Geographic Information System (GIS) solutions tailored to meet the evolving needs of modern
               industries.
             </motion.p>
@@ -136,7 +136,7 @@ export default function WelcomeIntro() {
               className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-6 border border-gray-100"
             >
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-r from-[#C7A24D] to-[#D97D25] flex items-center justify-center">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-r from-[#fb923c] to-[#ea580c] flex items-center justify-center">
                   <Award className="w-7 h-7 text-white" />
                 </div>
                 <div>

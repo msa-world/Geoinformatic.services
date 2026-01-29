@@ -104,7 +104,7 @@ export default function HeroVideo() {
                                     word === "Geoinformatic" ? (
                                         <span
                                             key={i}
-                                            className="text-transparent bg-clip-text bg-gradient-to-r from-[#C7A24D] to-[#D97D25]"
+                                            className="text-transparent bg-clip-text bg-gradient-to-r from-[#fb923c] to-[#ea580c]"
                                         >
                                             {word}{" "}
                                         </span>
@@ -129,7 +129,7 @@ export default function HeroVideo() {
                             >
                                 <a
                                     href="/contact"
-                                    className="pointer-events-auto w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-[#C7A24D] to-[#D97D25] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-orange-500/30 transition-all hover:scale-105 text-sm sm:text-lg"
+                                    className="pointer-events-auto w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-[#fb923c] to-[#ea580c] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-orange-500/30 transition-all hover:scale-105 text-sm sm:text-lg"
                                 >
                                     Get Started
                                 </a>
@@ -168,7 +168,7 @@ export default function HeroVideo() {
                         key={index}
                         onClick={() => goToSlide(index)}
                         className={`w-3 h-3 rounded-full transition-all ${index === currentSlide
-                            ? "bg-gradient-to-r from-[#C7A24D] to-[#D97D25] scale-125"
+                            ? "bg-gradient-to-r from-[#fb923c] to-[#ea580c] scale-125"
                             : "bg-white/40 hover:bg-white/60"
                             }`}
                         aria-label={`Go to slide ${index + 1}`}
