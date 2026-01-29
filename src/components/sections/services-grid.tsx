@@ -67,46 +67,44 @@ export default function ServicesGrid() {
   const cardsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // Clear any existing ScrollTriggers to prevent duplicates
-    ScrollTrigger.getAll().forEach(t => {
-      if (t.vars.id === "services-stack" || t.vars.id === "welcome-pin") {
-        t.kill();
-      }
-    });
+    // Kill any existing triggers with these IDs to prevent conflicts
+    ScrollTrigger.getById("services-stack")?.kill();
+    ScrollTrigger.getById("welcome-pin")?.kill();
 
-    // Pin the welcome intro section to create the stacking effect
     const welcomeIntro = document.querySelector("#welcome-intro");
-    if (welcomeIntro) {
+    
+    if (welcomeIntro && sectionRef.current) {
+      // 1. Pin Welcome Intro
       ScrollTrigger.create({
         id: "welcome-pin",
         trigger: welcomeIntro,
         start: "top top",
-        end: () => `+=${sectionRef.current?.offsetHeight || 800}`,
+        end: () => `+=${sectionRef.current?.offsetHeight || 1000}`,
         pin: true,
         pinSpacing: false,
-        scrub: true,
+        anticipatePin: 1,
       });
-    }
 
-    // Stack entrance animation for the services section
-    gsap.fromTo(sectionRef.current,
-      { 
-        y: "20vh",
-        opacity: 0.8
-      },
-      {
-        y: 0,
-        opacity: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          id: "services-stack",
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "top 20%",
-          scrub: true,
+      // 2. Stack animation for Services
+      gsap.fromTo(sectionRef.current,
+        { 
+          y: "30vh",
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            id: "services-stack",
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "top top",
+            scrub: true,
+          }
         }
-      }
-    );
+      );
+    }
 
     // Header animation
     gsap.from(".services-header", {
@@ -115,7 +113,8 @@ export default function ServicesGrid() {
       duration: 1,
       scrollTrigger: {
         trigger: ".services-header",
-        start: "top 80%",
+        start: "top 85%",
+        toggleActions: "play none none reverse"
       }
     });
 
@@ -129,7 +128,7 @@ export default function ServicesGrid() {
         ease: "power3.out",
         scrollTrigger: {
           trigger: cardsRef.current,
-          start: "top 85%",
+          start: "top 90%",
         }
       });
     }
@@ -138,7 +137,9 @@ export default function ServicesGrid() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-24 bg-[#0A0A0A] z-20 shadow-[0_-50px_100px_rgba(0,0,0,0.8)] border-t border-white/5"
+      id="services-section"
+      className="relative py-24 bg-[#0A0A0A] z-20 shadow-[0_-50px_100px_rgba(0,0,0,0.9)] border-t border-white/5"
+      style={{ willChange: "transform, opacity" }}
     >
       {/* Background Tech Pattern */}
       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none"

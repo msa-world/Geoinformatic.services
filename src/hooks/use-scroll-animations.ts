@@ -11,7 +11,7 @@ if (typeof window !== "undefined") {
 export const useScrollAnimations = () => {
   useEffect(() => {
     const refreshScrollTrigger = () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      // Don't kill all triggers globally as it interferes with local component triggers
       ScrollTrigger.refresh()
     }
 

@@ -50,7 +50,12 @@ export default function WelcomeIntro() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section ref={ref} id="welcome-intro" className="relative py-16 sm:py-24 lg:py-32 bg-white overflow-hidden z-10">
+    <section 
+      ref={ref} 
+      id="welcome-intro" 
+      className="relative py-16 sm:py-24 lg:py-32 bg-white overflow-hidden z-10"
+      style={{ transform: "translateZ(0)", willChange: "transform" }}
+    >
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-50" />
 
