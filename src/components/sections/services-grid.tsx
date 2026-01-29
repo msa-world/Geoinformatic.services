@@ -1,11 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Layers } from "lucide-react";
 import Link from "next/link";
 import { servicesData } from "@/data/services-data";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const ServiceCard = ({ service }: { service: typeof servicesData[0] }) => {
   return (
@@ -55,8 +62,72 @@ const ServiceCard = ({ service }: { service: typeof servicesData[0] }) => {
 };
 
 export default function ServicesGrid() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Pin the welcome intro section
+    const welcomeIntro = document.querySelector("#welcome-intro");
+    if (welcomeIntro) {
+      ScrollTrigger.create({
+        trigger: welcomeIntro,
+        start: "top top",
+        end: () => `+=${sectionRef.current?.offsetHeight || 0}`,
+        pin: true,
+        pinSpacing: false,
+        scrub: true,
+      });
+    }
+
+    // Advanced stacking animation
+    gsap.fromTo(sectionRef.current,
+      { 
+        clipPath: "inset(20% 0% 0% 0%)",
+        y: 100
+      },
+      {
+        clipPath: "inset(0% 0% 0% 0%)",
+        y: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "top 20%",
+          scrub: true,
+        }
+      }
+    );
+
+    // Header animation
+    gsap.from(".services-header", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: ".services-header",
+        start: "top 80%",
+      }
+    });
+
+    // Staggered cards entrance
+    if (cardsRef.current) {
+      gsap.from(".service-card-wrapper", {
+        y: 100,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 1.2,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 75%",
+        }
+      });
+    }
+  }, { scope: sectionRef });
+
   return (
-    <section className="relative py-24 bg-[#0A0A0A]">
+    <section ref={sectionRef} className="relative py-24 bg-[#0A0A0A] z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
       {/* Background Tech Pattern */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none"
         style={{
@@ -65,9 +136,9 @@ export default function ServicesGrid() {
         }}
       />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div ref={containerRef} className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <div className="mb-16">
+        <div className="mb-16 services-header">
           <span className="text-secondary font-mono tracking-widest text-xs sm:text-sm uppercase mb-4 block">// Our Expertise</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
             High-Tech <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Geospatial</span><br /> Solutions
@@ -78,15 +149,15 @@ export default function ServicesGrid() {
         </div>
 
         {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesData.map((service) => (
-            <div key={service.id} className="flex justify-center">
+            <div key={service.id} className="flex justify-center service-card-wrapper">
               <ServiceCard service={service} />
             </div>
           ))}
 
           {/* "See All" End Card */}
-          <div className="flex items-center justify-center p-8 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md">
+          <div className="flex items-center justify-center p-8 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md service-card-wrapper">
             <div className="text-center">
               <h3 className="text-2xl font-bold text-white mb-4">Ready to Start?</h3>
               <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-black font-bold rounded-full hover:bg-white transition-colors">
