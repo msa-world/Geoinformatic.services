@@ -37,7 +37,7 @@ export const servicesData: ServiceCategory[] = [
                 items: ["Web-based portals & dashboards", "Mobile data collection apps", "Real-time visualization", "API development"]
             }
         ],
-        imageUrl: "/gis_services_digital_1766823247007.png"
+        imageUrl: "/gis services.jpg"
     },
     {
         id: "remote-sensing",
@@ -77,7 +77,7 @@ export const servicesData: ServiceCategory[] = [
                 items: ["API Architecture", "Database Management", "Serverless Solutions", "Secure Authentication"]
             }
         ],
-        imageUrl: "/services-section/full-stack-dev.png"
+        imageUrl: "/full-stack web development_1681290664.png"
     },
     {
         id: "ai-solutions",
@@ -89,7 +89,7 @@ export const servicesData: ServiceCategory[] = [
                 items: ["Automated Pattern Recognition", "Geospatial Automation", "Predictive Modeling"]
             }
         ],
-        imageUrl: "/services-section/ai-automation.png"
+        imageUrl: "/AI-Automation.png"
     },
     {
         id: "ai-bots",
@@ -105,7 +105,7 @@ export const servicesData: ServiceCategory[] = [
                 items: ["Workflow Automation", "API Integrations", "CRM Syncing", "24/7 Virtual availability"]
             }
         ],
-        imageUrl: "/services-section/ai-bots.png"
+        imageUrl: "/Creating-AI-Chatbots-for-Customer-Service-in-2024.png"
     },
     {
         id: "drone-survey",
@@ -125,7 +125,7 @@ export const servicesData: ServiceCategory[] = [
                 items: ["Cadastral Support", "Infrastructure Corridors", "Urban Base Mapping", "Crop Health Analysis"]
             }
         ],
-        imageUrl: "/services-section/Topographical Surveying Services.jpg"
+        imageUrl: "/drone-surveying-land-surveyor-gnss-drone.png"
     },
     {
         id: "environmental-agriculture",

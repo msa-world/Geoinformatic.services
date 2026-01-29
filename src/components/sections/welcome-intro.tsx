@@ -115,9 +115,9 @@ export default function WelcomeIntro() {
             initial={{ opacity: 0, x: 100, scale: 0.9 }}
             animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
+            className="relative flex justify-center lg:justify-end"
           >
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative w-full max-w-lg lg:max-w-none aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
               <Image
                 src="/extra-images/project.jpeg"
                 alt="GIS Team at Work"
@@ -133,7 +133,7 @@ export default function WelcomeIntro() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-6 border border-gray-100"
+              className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 lg:-left-6 lg:translate-x-0 bg-white rounded-2xl shadow-xl p-6 border border-gray-100"
             >
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-r from-[#fb923c] to-[#ea580c] flex items-center justify-center">
