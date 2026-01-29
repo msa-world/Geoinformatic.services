@@ -80,11 +80,11 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonialsDat
                 }}
             />
 
-            {/* Content Container */}
-            <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
+                    {/* Content Container */}
+            <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 md:p-12">
                 {/* Glassmorphism Card for Text */}
                 <motion.div
-                    className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-8"
+                    className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-6 sm:p-8"
                     animate={{
                         y: isHovered ? 0 : 10,
                         backgroundColor: isHovered ? "rgba(255, 255, 255, 0.15)" : "rgba(255, 255, 255, 0.1)",
@@ -100,20 +100,20 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonialsDat
                         }}
                     />
 
-                    <Quote className="mb-6 h-10 w-10 text-[#D97D25]" />
+                    <Quote className="mb-4 sm:mb-6 h-8 w-8 sm:h-10 sm:w-10 text-[#D97D25]" />
 
-                    <p className="mb-8 text-xl leading-relaxed text-gray-100/90 font-light italic">
+                    <p className="mb-6 sm:mb-8 text-lg sm:text-xl leading-relaxed text-white font-normal">
                         "{testimonial.quote}"
                     </p>
 
-                    <div className="flex items-center gap-4 border-t border-white/10 pt-6">
+                    <div className="flex items-center gap-4 border-t border-white/10 pt-4 sm:pt-6">
                         <div>
-                            <h3 className="text-2xl font-bold text-white">
+                            <h3 className="text-xl sm:text-2xl font-bold text-white">
                                 <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                                     {testimonial.name}
                                 </span>
                             </h3>
-                            <p className="text-base font-medium text-[#D97D25]">{testimonial.title}</p>
+                            <p className="text-sm sm:text-base font-medium text-[#D97D25]">{testimonial.title}</p>
                         </div>
                     </div>
                 </motion.div>
@@ -148,8 +148,8 @@ export default function TestimonialsCarousel() {
                         <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-gray-900 md:text-6xl leading-tight mb-4 sm:mb-6 uppercase">
                             What Our Clients
                             <br />
-                            <span className="bg-gradient-to-r from-[#D97D25] to-[#b56010] bg-clip-text text-transparent italic font-black">
-                                Says About Us
+                            <span className="bg-gradient-to-r from-[#D97D25] to-[#b56010] bg-clip-text text-transparent font-bold">
+                                Say About Us
                             </span>
                         </h2>
                         <p className="text-base sm:text-lg leading-7 sm:leading-8 text-gray-600 max-w-lg mb-6 sm:mb-8 mx-auto lg:mx-0">
