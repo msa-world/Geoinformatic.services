@@ -67,30 +67,39 @@ export default function ServicesGrid() {
   const cardsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // Pin the welcome intro section
+    // Clear any existing ScrollTriggers to prevent duplicates
+    ScrollTrigger.getAll().forEach(t => {
+      if (t.vars.id === "services-stack" || t.vars.id === "welcome-pin") {
+        t.kill();
+      }
+    });
+
+    // Pin the welcome intro section to create the stacking effect
     const welcomeIntro = document.querySelector("#welcome-intro");
     if (welcomeIntro) {
       ScrollTrigger.create({
+        id: "welcome-pin",
         trigger: welcomeIntro,
         start: "top top",
-        end: () => `+=${sectionRef.current?.offsetHeight || 0}`,
+        end: () => `+=${sectionRef.current?.offsetHeight || 800}`,
         pin: true,
         pinSpacing: false,
         scrub: true,
       });
     }
 
-    // Advanced stacking animation
+    // Stack entrance animation for the services section
     gsap.fromTo(sectionRef.current,
       { 
-        clipPath: "inset(20% 0% 0% 0%)",
-        y: 100
+        y: "20vh",
+        opacity: 0.8
       },
       {
-        clipPath: "inset(0% 0% 0% 0%)",
         y: 0,
-        ease: "none",
+        opacity: 1,
+        ease: "power2.out",
         scrollTrigger: {
+          id: "services-stack",
           trigger: sectionRef.current,
           start: "top bottom",
           end: "top 20%",
@@ -113,23 +122,26 @@ export default function ServicesGrid() {
     // Staggered cards entrance
     if (cardsRef.current) {
       gsap.from(".service-card-wrapper", {
-        y: 100,
+        y: 60,
         opacity: 0,
-        stagger: 0.15,
-        duration: 1.2,
-        ease: "power4.out",
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: cardsRef.current,
-          start: "top 75%",
+          start: "top 85%",
         }
       });
     }
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="relative py-24 bg-[#0A0A0A] z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+    <section 
+      ref={sectionRef} 
+      className="relative py-24 bg-[#0A0A0A] z-20 shadow-[0_-50px_100px_rgba(0,0,0,0.8)] border-t border-white/5"
+    >
       {/* Background Tech Pattern */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none"
+      <div className="absolute inset-0 z-0 opacity-10 pointer-events-none"
         style={{
           backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
           backgroundSize: '40px 40px'
