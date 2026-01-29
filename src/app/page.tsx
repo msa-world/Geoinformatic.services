@@ -6,7 +6,6 @@ import ProfessionalApproach from "@/components/sections/professional-approach";
 import TestimonialsCarousel from "@/components/sections/testimonials-carousel";
 import CtaHelpSection from "@/components/sections/cta-help";
 import Footer from "@/components/sections/footer";
-import JobsCTA from "@/components/sections/jobs-cta";
 import ScrollTriggerRefresher from '@/components/ScrollTriggerRefresher';
 
 export default function HomePage() {
@@ -19,7 +18,6 @@ export default function HomePage() {
           <HeroVideo />
           <WelcomeIntro />
           <ServicesGrid />
-          <JobsCTA />
           <ProfessionalApproach />
           <TestimonialsCarousel />
           <CtaHelpSection />
