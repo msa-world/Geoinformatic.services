@@ -19,12 +19,10 @@ export default function HomePage() {
           <HeroVideo />
           <WelcomeIntro />
           <ServicesGrid />
-          <div className="relative z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.1)]">
-            <JobsCTA />
-            <ProfessionalApproach />
-            <TestimonialsCarousel />
-            <CtaHelpSection />
-          </div>
+          <JobsCTA />
+          <ProfessionalApproach />
+          <TestimonialsCarousel />
+          <CtaHelpSection />
         </main>
         <Footer />
       </div>
