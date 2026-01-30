@@ -4,7 +4,7 @@ import HeaderNavigation from "@/components/sections/header-navigation";
 import Footer from "@/components/sections/footer";
 import Image from "next/image";
 import { Target, Users, Award, TrendingUp, CheckCircle2, ArrowRight } from "lucide-react";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const stats = [
@@ -37,7 +37,8 @@ const values = [
     },
 ];
 
-import ParticleGlobe from "@/components/ui/particle-globe";
+import dynamic from "next/dynamic";
+const ParticleGlobe = dynamic(() => import("@/components/ui/particle-globe"), { ssr: false, loading: () => <div /> });
 
 export default function AboutPage() {
     const containerRef = useRef(null);
@@ -48,6 +49,8 @@ export default function AboutPage() {
 
     const yHero = useTransform(scrollYProgress, [0, 0.2], [0, 100]);
     const opacityHero = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+    const [mounted, setMounted] = useState(false)
+    useEffect(() => setMounted(true), [])
 
     return (
         <div ref={containerRef} className="min-h-screen w-full bg-white selection:bg-primary/30">
@@ -58,7 +61,7 @@ export default function AboutPage() {
                 <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-black">
                     {/* Particle Globe Layer */}
                     <div className="absolute inset-0 w-full h-full z-0">
-                        <ParticleGlobe variant="map" />
+                        {mounted && <ParticleGlobe variant="map" count={1500} />}
                         <div className="absolute inset-0 bg-black/50 pointer-events-none z-10"></div>
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60 pointer-events-none z-10"></div>
                     </div>

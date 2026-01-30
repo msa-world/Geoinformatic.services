@@ -4,10 +4,13 @@ import HeaderNavigation from "@/components/sections/header-navigation";
 import Footer from "@/components/sections/footer";
 import Image from "next/image";
 import { MapPin, Calendar, Layers, ArrowRight, ExternalLink } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { projects } from "@/data/projects";
-import ParticleGlobe from "@/components/ui/particle-globe";
+import dynamic from "next/dynamic";
+
+// Dynamically load the heavy particle component on client only and only after mount
+const ParticleGlobe = dynamic(() => import("@/components/ui/particle-globe"), { ssr: false, loading: () => <div /> });
 
 
 
@@ -20,6 +23,8 @@ export default function ProjectsPage() {
 
   const yHero = useTransform(scrollYProgress, [0, 0.2], [0, 100]);
   const opacityHero = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
 
   return (
     <div ref={containerRef} className="min-h-screen w-full bg-white selection:bg-primary/30">
@@ -29,8 +34,8 @@ export default function ProjectsPage() {
         {/* Hero Section with Particle Globe */}
         <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-black">
           {/* Particle Globe Layer */}
-          <div className="absolute inset-0 w-full h-full z-0">
-            <ParticleGlobe variant="earth" />
+            <div className="absolute inset-0 w-full h-full z-0">
+            {mounted && <ParticleGlobe variant="earth" count={2000} />}
             <div className="absolute inset-0 bg-black/60 pointer-events-none z-10"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/80 pointer-events-none z-10"></div>
           </div>

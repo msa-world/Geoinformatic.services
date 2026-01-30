@@ -4,7 +4,12 @@ import { useRef } from "react"
 import { motion, useInView, Variants } from "framer-motion"
 import { MapPin, Target, Award, Users } from "lucide-react"
 import Image from "next/image"
-import { DotLottieReact } from '@lottiefiles/dotlottie-react'
+import dynamic from "next/dynamic"
+// Dynamically load the DotLottie component on the client only when needed.
+const DotLottieReact = dynamic(
+  () => import('@lottiefiles/dotlottie-react').then((mod) => mod.DotLottieReact),
+  { ssr: false, loading: () => <div style={{ width: 28, height: 28 }} /> }
+)
 
 const paragraphVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -116,7 +121,9 @@ export default function WelcomeIntro() {
                 src="/extra-images/project.jpeg"
                 alt="GIS Team at Work"
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
+                className="object-cover transition-transform duration-700 will-change-transform"
+                priority
+                quality={75}
               />
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
@@ -131,12 +138,17 @@ export default function WelcomeIntro() {
             >
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-r from-[#fb923c] to-[#ea580c] flex items-center justify-center">
-                  <DotLottieReact
-                    src="https://lottie.host/e6e3ed6f-20d9-435e-baed-65a0b97166cd/hBAJdH3ikK.lottie"
-                    loop
-                    autoplay
-                    style={{ width: 28, height: 28 }}
-                  />
+                  {/* Only render the Lottie when the hero is in view to avoid loading animation bundle on first paint */}
+                  {isInView ? (
+                    <DotLottieReact
+                      src="https://lottie.host/e6e3ed6f-20d9-435e-baed-65a0b97166cd/hBAJdH3ikK.lottie"
+                      loop
+                      autoplay
+                      style={{ width: 28, height: 28 }}
+                    />
+                  ) : (
+                    <div aria-hidden className="w-7 h-7 rounded-full bg-white/30" />
+                  )}
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-gray-900">5+</div>

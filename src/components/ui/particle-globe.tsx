@@ -15,7 +15,7 @@ interface ParticleGlobeProps {
 // but keeping it doesn't hurt. For brevity/cleanliness in this specific task, 
 // I will remove the hardcoded polygon to rely fully on the image as requested.
 
-function GlobeParticles({ count = 8000, variant = "sphere" }: ParticleGlobeProps) {
+function GlobeParticles({ count = 2000, variant = "sphere" }: ParticleGlobeProps) {
     const mesh = useRef<THREE.Points>(null);
     const { mouse, camera } = useThree();
 
@@ -225,7 +225,12 @@ function GlobeParticles({ count = 8000, variant = "sphere" }: ParticleGlobeProps
 
     const raycaster = new THREE.Raycaster();
 
-    useFrame((state) => {
+    // Throttle updates to ~30fps to reduce CPU/GPU usage on lower-end devices
+    const accumRef = useRef(0)
+    useFrame((state, delta) => {
+        accumRef.current += delta
+        if (accumRef.current < 1 / 30) return
+        accumRef.current = 0
         if (!mesh.current) return;
 
         const time = state.clock.getElapsedTime();
@@ -356,17 +361,32 @@ function GlobeParticles({ count = 8000, variant = "sphere" }: ParticleGlobeProps
     );
 }
 
-export default function ParticleGlobe({ variant = "sphere" }: { variant?: "sphere" | "ring" | "map" | "earth" }) {
+export default function ParticleGlobe({ variant = "sphere", count = 2000 }: { variant?: "sphere" | "ring" | "map" | "earth", count?: number }) {
+    // Respect user preference for reduced motion — render a lightweight fallback.
+    const [reduced, setReduced] = React.useState(false)
+    React.useEffect(() => {
+        if (typeof window === 'undefined') return
+        const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+        setReduced(mq.matches)
+        const handler = () => setReduced(mq.matches)
+        mq.addEventListener?.('change', handler)
+        return () => mq.removeEventListener?.('change', handler)
+    }, [])
+
+    if (reduced) {
+        return <div className="absolute inset-0 z-0 bg-black/40" aria-hidden />
+    }
+
     return (
         <div className="absolute inset-0 z-0">
             <Canvas
                 camera={{ position: [0, 0, 6.5], fov: 55 }}
-                dpr={[1, 2]}
-                gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}
+                dpr={[1, 1.5]}
+                gl={{ antialias: false, alpha: true }}
                 style={{ pointerEvents: 'auto' }}
             >
                 <Suspense fallback={null}>
-                    <GlobeParticles variant={variant} />
+                    <GlobeParticles variant={variant} count={count} />
                 </Suspense>
                 <ambientLight intensity={0.6} />
             </Canvas>
