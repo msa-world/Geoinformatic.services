@@ -110,11 +110,37 @@ export default function LightIndeedJobsPage() {
         fetchJobsAndUserStates();
     }, []);
 
+    // If user is not signed in, show a single centered prompt and don't render the full jobs UI
+    if (!user) {
+        return (
+            <div className="min-h-screen bg-[#FDFDFD] flex flex-col pt-[80px]">
+                <HeaderNavigation />
+                <main className="flex-1 flex items-center justify-center py-20 px-4">
+                    <div className="w-full max-w-3xl">
+                        <div className="bg-white border-2 border-dashed border-[#D97D25]/20 rounded-2xl p-12 text-center shadow-sm">
+                            <div className="w-24 h-24 mx-auto rounded-full bg-orange-50 flex items-center justify-center mb-6 border border-[#D97D25]/20">
+                                <Briefcase className="w-10 h-10 text-[#D97D25]" />
+                            </div>
+                            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 uppercase mb-3">LOGIN TO VIEW JOBS</h2>
+                            <p className="text-gray-500 mb-6">Create an account or sign in to explore and apply for openings.</p>
+                            <div className="flex justify-center">
+                                <Link href="/auth/login">
+                                    <Button className="bg-[#D97D25] text-white px-6 py-3 rounded-lg shadow">Sign In Now</Button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <Footer />
+            </div>
+        );
+    }
+
     useEffect(() => {
         filterJobs();
     }, [searchTerm, locationSearch, selectedType, selectedDept, selectedSalary, selectedDate, jobs]);
 
-    const fetchJobsAndUserStates = async () => {
+    async function fetchJobsAndUserStates() {
         setIsLoading(true);
         try {
             // 1. Fetch Jobs
@@ -144,7 +170,7 @@ export default function LightIndeedJobsPage() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }
 
     const handleShare = async (e: React.MouseEvent, job: Job) => {
         e.preventDefault();
@@ -295,11 +321,8 @@ export default function LightIndeedJobsPage() {
                                     Careers at Geoinformatics Services
                                 </Badge>
                                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight leading-[1.1]">
-                                    Join the <span className="text-primary italic">Future</span> of <br className="hidden md:block" /> Geospatial Services
+                                    Jobs
                                 </h1>
-                                <p className="text-gray-400 text-lg font-medium max-w-xl">
-                                    Join <span className="text-gray-900 font-bold">GEOINFORMATIC SERVICES</span> and work on projects that define high-precision geographic excellence.
-                                </p>
                             </div>
                             <div className="flex flex-wrap gap-3">
                                 <Link href="/jobs/guide">
@@ -806,13 +829,15 @@ export default function LightIndeedJobsPage() {
                 .float { animation: float 6s ease-in-out infinite; }
             `}</style>
 
-            {/* Floating Job Alert Toggle */}
-            <div className="fixed bottom-6 right-6 z-50">
-                <JobAlertToggle
-                    className="h-14 w-14 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-primary/20 hover:scale-110 transition-transform duration-300"
-                    showLabel={false}
-                />
-            </div>
+            {/* Floating Job Alert Toggle (only when logged in) */}
+            {user && (
+                <div className="fixed bottom-6 right-6 z-50">
+                    <JobAlertToggle
+                        className="h-14 w-14 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-primary/20 hover:scale-110 transition-transform duration-300"
+                        showLabel={false}
+                    />
+                </div>
+            )}
         </div >
     );
 }

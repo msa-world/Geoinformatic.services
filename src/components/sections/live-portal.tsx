@@ -18,7 +18,7 @@ export default function LivePortal() {
 
           <div className="mt-6 lg:mt-8">
             <a
-              href="https://islamabad-portal.vercel.app/"
+              href="https://geoinformatic-portal.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-[#f97316] hover:bg-[#f97316]/90 text-white rounded-md shadow-md"
@@ -33,7 +33,7 @@ export default function LivePortal() {
         <div className="w-full lg:w-2/3 flex items-center justify-center">
           <div className="w-full h-[60vh] lg:h-[70vh] rounded-2xl overflow-hidden border border-gray-200 shadow-lg bg-white">
             <iframe
-              src="https://islamabad-portal.vercel.app/"
+              src="https://geoinformatic-portal.vercel.app/"
               title="Live Portal Preview"
               className="w-full h-full"
               sandbox="allow-same-origin allow-scripts allow-forms allow-popups"

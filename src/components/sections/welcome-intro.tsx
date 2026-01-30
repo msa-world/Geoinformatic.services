@@ -4,13 +4,7 @@ import { useRef } from "react"
 import { motion, useInView, Variants } from "framer-motion"
 import { MapPin, Target, Award, Users } from "lucide-react"
 import Image from "next/image"
-
-const stats = [
-  { icon: MapPin, value: "10+", label: "Projects Delivered" },
-  { icon: Target, value: "98%", label: "Client Satisfaction" },
-  { icon: Award, value: "5+", label: "Years Experience" },
-  { icon: Users, value: "50+", label: "Team Members" },
-]
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 
 const paragraphVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -137,7 +131,12 @@ export default function WelcomeIntro() {
             >
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-r from-[#fb923c] to-[#ea580c] flex items-center justify-center">
-                  <Award className="w-7 h-7 text-white" />
+                  <DotLottieReact
+                    src="https://lottie.host/e6e3ed6f-20d9-435e-baed-65a0b97166cd/hBAJdH3ikK.lottie"
+                    loop
+                    autoplay
+                    style={{ width: 28, height: 28 }}
+                  />
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-gray-900">5+</div>
