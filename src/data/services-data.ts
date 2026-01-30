@@ -169,7 +169,7 @@ export const servicesData: ServiceCategory[] = [
                 items: ["Double-Key Entry", "Data Cleaning/Standardization", "Validation & Verification"]
             }
         ],
-        imageUrl: "/services-section/Georeferencing & Digitization Services.jpg"
+        imageUrl: "/diditizing.jpeg"
     },
     // Remaining services preserved at the end
     {
