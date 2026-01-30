@@ -113,7 +113,7 @@ export default function ProjectsPage() {
 
                               {/* Live Iframe */}
                               <iframe
-                                src="https://geoinformatic-portal.vercel.app/"
+                                src="https://polygon-portal.vercel.app/"
                                 title="Web GIS Portal Live Preview"
                                 className="w-full h-full border-0 bg-white"
                                 loading="lazy"
@@ -167,7 +167,7 @@ export default function ProjectsPage() {
                       {project.title === "Web GIS Management Portal" && (
                         <div className="mb-8">
                           <a
-                            href="https://geoinformatic-portal.vercel.app/"
+                            href="https://polygon-portal.vercel.app/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C7A24D] to-[#D97D25] text-white rounded-full font-semibold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:scale-105 transition-all group"
